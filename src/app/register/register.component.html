@@ -1,0 +1,21 @@
+<div class="container d-flex flex-column">
+    <div class="text-center p-2" >
+        <img class="w-25" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Facebook_Logo_2023.png/1024px-Facebook_Logo_2023.png">
+        <h4>ورود به برنامه</h4>
+        <div>لطفا شماره تلفن خود را وارد کنید.</div>
+    </div>
+    
+    <form>
+        <div class="mb-3">
+          <label for="number" class="form-label">شماره تلفن</label>
+          <input type="number" class="form-control" id="number" name="number" [(ngModel)]="number" >
+        </div>
+        <div class="mb-3 form-check">
+          <input type="checkbox" class="form-check-input" id="exampleCheck1">
+          <label class="form-check-label" for="exampleCheck1">مرا به خاطر نگه دار</label>
+        </div>
+        <div class="d-grid">
+            <button class="btn btn-primary" type="submit" (click)="onSubmit()">ادامه</button>
+          </div>
+      </form>
+</div>
