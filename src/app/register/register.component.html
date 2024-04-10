@@ -1,21 +1,22 @@
-<div class="container d-flex flex-column">
-    <div class="text-center p-2" >
-        <img class="w-25" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Facebook_Logo_2023.png/1024px-Facebook_Logo_2023.png">
-        <h4>ورود به برنامه</h4>
-        <div>لطفا شماره تلفن خود را وارد کنید.</div>
-    </div>
-    
-    <form>
-        <div class="mb-3">
-          <label for="number" class="form-label">شماره تلفن</label>
-          <input type="number" class="form-control" id="number" name="number" [(ngModel)]="number" >
-        </div>
-        <div class="mb-3 form-check">
-          <input type="checkbox" class="form-check-input" id="exampleCheck1">
-          <label class="form-check-label" for="exampleCheck1">مرا به خاطر نگه دار</label>
-        </div>
-        <div class="d-grid">
-            <button class="btn btn-primary" type="submit" (click)="onSubmit()">ادامه</button>
-          </div>
-      </form>
+<div class="con">
+  <div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6c/Facebook_Logo_2023.png/1024px-Facebook_Logo_2023.png">
+      <h4 style="text-align: center;">ورود به برنامه</h4>
+      <h6 style="text-align: center;">لطفا شماره تلفن خود را وارد کنید.</h6>
+  </div>
+
+  <form >
+    <mat-form-field class="full-width">
+      <mat-label>شماره تلفن</mat-label>
+      <input type="number" matInput [formControl]="emailFormControl" placeholder="Ex. 0912 345 6789" class="input">
+      @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+        <mat-error>Please enter a valid email address</mat-error>
+      }
+      @if (emailFormControl.hasError('required')) {
+        <mat-error>Email is <strong>required</strong></mat-error>
+      }
+    </mat-form-field>
+    <mat-checkbox  [(ngModel)]="checked">مرا به خاطر نگه دار</mat-checkbox>
+    <button mat-flat-button color="primary" type="submit" (click)="onSubmit()" class="full-width">ادامه</button>
+    </form>
 </div>

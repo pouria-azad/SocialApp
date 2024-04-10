@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { RegisterComponent } from './register/register.component';
 
 export const routes: Routes = [
-    { path: 'register', component: RegisterComponent }
+    { path: 'login', component: RegisterComponent }
 ];
 
 @NgModule({
