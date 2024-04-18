@@ -1,0 +1,49 @@
+.first{
+    height: 622px;
+    width: 350px;
+    background-image: url(https://e0.pxfuel.com/wallpapers/875/426/desktop-wallpaper-i-whatsapp-background-chat-whatsapp-graffiti-thumbnail.jpg);
+    background-repeat: no-repeat;
+    background-size: contain;
+    overflow-y: scroll;
+}
+
+.two{
+    width: 100%;
+    height: 70px;
+    background-color: blue;
+    display: grid;
+    position: sticky;
+    top: 0;
+}
+
+.myChat{
+    width: 50%;
+    height: 40px;
+    border-radius: 50px;
+    background-color: blueviolet;
+    color: white;
+    text-align: center;
+    justify-self: start;
+}
+
+.yourChat{
+    width: 50%;
+    height: 40px;
+    border-radius: 50px;
+    background-color: rgb(9, 118, 228);
+    color: white;
+    text-align: center;
+    justify-self: end;
+}
+
+.txt{
+    display: grid;
+}
+
+section{
+    height: 90vh;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+}

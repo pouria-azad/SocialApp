@@ -15,7 +15,7 @@ import { RouterModule } from '@angular/router';
     <div class="button-row">
       <button mat-raised-button [routerLink]="['/']">صفحه اصلی</button>
       <button mat-raised-button color="primary" [routerLink]="['login']">ورود</button>
-      <button mat-raised-button color="accent">Accent</button>
+      <button mat-raised-button color="accent" [routerLink]="['chat']">چت</button>
       <button mat-raised-button color="warn">Warn</button>
       <button mat-raised-button disabled>Disabled</button>
   </div>

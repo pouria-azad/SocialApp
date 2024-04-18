@@ -1,0 +1,15 @@
+<section>
+<div class="first">
+    <div class="two">
+        <span style="color: white;text-align: center;margin-top: 20px;">Pouria Azad</span>
+    </div>
+    <div class="txt">
+    <p *ngFor="let ch of chat" [class.myChat]="ch.sender === 'me'" [class.yourChat]="ch.sender !== 'me'">{{ch.content}}</p>
+
+    </div>
+</div>
+<mat-form-field class="example-full-width">
+    <mat-label>ارسال پیام</mat-label>
+    <textarea matInput placeholder="سلام چطوری..." (keyup.enter)="handleKeyUp()" [(ngModel)]="message"></textarea>
+</mat-form-field>
+</section>
