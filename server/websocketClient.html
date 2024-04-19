@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>WebSocket Client</title>
+</head>
+<body>
+  <h1>WebSocket Client</h1>
+  <div>
+    <label for="messageInput">Message:</label>
+    <input type="text" id="messageInput">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  <div>
+    <label for="messageLog">Message Log:</label>
+    <textarea id="messageLog" rows="10" readonly></textarea>
+  </div>
+
+  <script>
+    let socket;
+
+    function initWebSocket() {
+      socket = new WebSocket("ws://localhost:8080");
+
+      socket.onopen = function() {
+        log("WebSocket connection established.");
+      };
+
+      socket.onmessage = function(event) {
+        log("Received message: " + event.data);
+      };
+
+      socket.onclose = function() {
+        log("WebSocket connection closed.");
+      };
+
+      socket.onerror = function(error) {
+        log("WebSocket error: " + error);
+      };
+    }
+
+    function sendMessage() {
+      const messageInput = document.getElementById("messageInput");
+      const message = messageInput.value;
+      if (message.trim() !== "") {
+        socket.send(message);
+        messageInput.value = "";
+      }
+    }
+
+    function log(message) {
+      const messageLog = document.getElementById("messageLog");
+      messageLog.value += message + "\n";
+      messageLog.scrollTop = messageLog.scrollHeight;
+    }
+
+    initWebSocket();
+  </script>
+</body>
+</html>

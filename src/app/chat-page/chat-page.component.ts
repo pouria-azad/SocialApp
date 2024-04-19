@@ -3,6 +3,7 @@ import {MatInputModule} from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { Chats } from '../chats';
 import { FormsModule } from '@angular/forms';
+import { webSocket } from 'rxjs/webSocket';
 
 @Component({
   selector: 'app-chat-page',
@@ -57,8 +58,16 @@ sendMessage(message: string){
   console.log(this.chat[this.chat.length-1])
 }
 
+subject = webSocket('ws://localhost:8080/');
+sendServer(message: string){
+  this.subject.subscribe();
+  this.subject.next(message);
+  this.subject.complete();
+}
+
 handleKeyUp(){
   this.sendMessage(this.message.replace(/\n$/, ''));
+  this.sendServer(this.message);  
   this.message = ""
 }
 
