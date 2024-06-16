@@ -1,76 +1,46 @@
 import { Component } from '@angular/core';
 import {MatInputModule} from '@angular/material/input';
 import { CommonModule } from '@angular/common';
-import { Chats } from '../chats';
+import { ChatI } from '../chat-i';
 import { FormsModule } from '@angular/forms';
-import { webSocket } from 'rxjs/webSocket';
 
+import { remoteChatStore } from '../remote-chat-store';
 @Component({
   selector: 'app-chat-page',
   standalone: true,
   imports: [MatInputModule, CommonModule, FormsModule],
   templateUrl: './chat-page.component.html',
-  styleUrl: './chat-page.component.css'
+  styleUrl: './chat-page.component.css',
+  providers: [remoteChatStore]
 })
 export class ChatPageComponent {
 
-  chat: Chats[]=[
-    {
-    id: 1,
-    content: 'hello',
-    date: new Date(),
-    status: true,
-    sender: 'me',
-    },
-    {
-    id: 2,
-    content: 'how are you',
-    date: new Date(),
-    status: true,
-    sender: 'you',
-    },
-    {
-    id: 3,
-    content: 'i am pouria',
-    date: new Date(),
-    status: true,
-    sender: 'me',
-    },
-    {
-    id: 4,
-    content: 'and you?',
-    date: new Date(),
-    status: true,
-    sender: 'me',
-    },
-]
+messageStore : remoteChatStore;
+newChatText = '';
 
-message: string = '';
-
-sendMessage(message: string){
-  this.chat.push({
-    id: ++this.chat[this.chat.length - 1].id,
-    content: message,
-    date: new Date(),
-    status: false,
-    sender: 'me'
-  })
-  console.log(this.chat[this.chat.length-1])
+constructor(messageStore: remoteChatStore){
+  this.messageStore = messageStore;
 }
 
-subject = webSocket('ws://localhost:8080/');
-sendServer(message: string){
-  this.subject.subscribe();
-  this.subject.next(message);
-  this.subject.complete();
+DeleteChat(chat : ChatI){
+  this.messageStore.remove(chat)
 }
 
-handleKeyUp(){
-  this.sendMessage(this.message.replace(/\n$/, ''));
-  this.sendServer(this.message);  
-  this.message = ""
+SendChat(){
+  if (this.newChatText.trim().length){
+    let chat : ChatI = {
+      id: this.messageStore.getLatestChatId() + 1,
+      content: this.newChatText,
+      date: new Date(),
+      status: false,
+      sender: 'me',
+    }
+    // console.log(this.messageStore.getLatestChatId());
+    this.messageStore.add(chat);
+    this.messageStore.sendChat(chat)
+    this.newChatText = '';
+  }
 }
-
 
 
 }
